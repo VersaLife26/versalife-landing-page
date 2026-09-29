@@ -101,9 +101,11 @@ export function GatewayPage() {
             <span className="live-dot live-dot-sm" aria-hidden />
             <span>VersaLife Health · Sri Lanka&apos;s Unified Care Gateway</span>
           </div>
-          <h1 className="gateway-headline">
-            One platform. <em>Three ways to care.</em>
-          </h1>
+          <div className="gateway-headline-3d">
+            <h1 className="gateway-headline">
+              One platform. <em>Three ways to care.</em>
+            </h1>
+          </div>
           <p className="gateway-lead">
             Shop wellness products, book telemedicine visits, or schedule hospital appointments — all under one
             trusted clinical brand.

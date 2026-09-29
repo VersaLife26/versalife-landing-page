@@ -1,6 +1,7 @@
 "use client";
 
 import { MaterialIcon } from "@/components/material-icon";
+import { useCardTilt } from "@/components/use-card-tilt";
 import type { Service } from "@/lib/services";
 
 type Props = {
@@ -86,14 +87,18 @@ export function ServiceCard({ service, onNavigate, index }: Props) {
     service.accent === "mint" ? "accent-mint" : service.accent === "navy" ? "accent-navy" : "accent-slate";
 
   const handleActivate = () => onNavigate(service.url, service.name);
+  const { ref, onMove, onLeave } = useCardTilt();
 
   return (
     <article
-      className={`service-card ${accentClass} reveal-on-scroll`}
+      ref={ref}
+      className={`service-card service-card-3d ${accentClass} reveal-on-scroll`}
       style={{ ["--reveal-delay" as string]: `${120 + index * 80}ms` }}
       aria-label={`Navigate to ${service.name}`}
       tabIndex={0}
       role="link"
+      onPointerMove={onMove}
+      onPointerLeave={onLeave}
       onClick={handleActivate}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {

@@ -377,6 +377,13 @@ a {
   }
 }
 
+.gateway-headline-3d {
+  perspective: 900px;
+  transform-style: preserve-3d;
+  animation: heroFloat3d 9s ease-in-out infinite;
+  will-change: transform;
+}
+
 .gateway-headline {
   font-family: var(--font-display);
   font-size: clamp(34px, 5.8vw, 62px);
@@ -385,6 +392,20 @@ a {
   font-weight: 400;
   margin: 0;
   text-wrap: balance;
+  transform: translateZ(24px);
+  text-shadow:
+    0 1px 0 rgb(255 255 255 / 0.8),
+    0 18px 40px rgb(1 85 145 / 0.12);
+}
+
+@keyframes heroFloat3d {
+  0%,
+  100% {
+    transform: rotateX(4deg) rotateY(-3deg) translateZ(0);
+  }
+  50% {
+    transform: rotateX(-5deg) rotateY(4deg) translateZ(16px);
+  }
 }
 
 .gateway-headline em {
@@ -438,6 +459,7 @@ a {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
+  perspective: 1400px;
 }
 
 @media (min-width: 1024px) {
@@ -456,6 +478,9 @@ a {
 
 /* Service cards */
 .service-card {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --lift: 0px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -467,14 +492,18 @@ a {
   box-shadow: var(--shadow-card);
   cursor: pointer;
   overflow: hidden;
+  transform-style: preserve-3d;
   transition:
-    transform 300ms var(--ease),
+    transform 280ms var(--ease),
     box-shadow 300ms var(--ease);
   outline: none;
 }
 
-.service-card:hover {
-  transform: translateY(-6px);
+.service-card-3d {
+  transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateY(calc(-6px - var(--lift)));
+}
+
+.service-card-3d:hover {
   box-shadow: var(--shadow-card-hover);
 }
 
@@ -523,7 +552,12 @@ a {
   border-radius: 0.75rem;
   display: grid;
   place-items: center;
-  transition: background 250ms var(--ease), color 250ms var(--ease);
+  transition: background 250ms var(--ease), color 250ms var(--ease), transform 280ms var(--ease);
+  transform: translateZ(28px);
+}
+
+.service-card-3d:hover .service-card-icon {
+  transform: translateZ(40px) scale(1.05);
 }
 
 .service-card.accent-mint .service-card-icon {
@@ -1126,7 +1160,8 @@ a {
   .ambient-backdrop-img,
   .gateway-cue,
   .live-dot::before,
-  .gateway-toast-spinner {
+  .gateway-toast-spinner,
+  .gateway-headline-3d {
     animation: none !important;
   }
 
@@ -1135,11 +1170,16 @@ a {
     transform: none;
   }
 
-  .service-card:hover {
+  .service-card-3d,
+  .service-card-3d:hover {
     transform: none;
   }
 
   .service-card:hover .card-visual-img {
     transform: none;
+  }
+
+  .service-card-3d:hover .service-card-icon {
+    transform: translateZ(0);
   }
 }
