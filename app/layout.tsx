@@ -16,10 +16,19 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "VersaLife Health — One platform. Three ways to care.",
+  title: "VersaLife Health",
   description:
     "Shop wellness products, book telemedicine visits, or schedule hospital appointments — all under one trusted VersaLife Health brand.",
   metadataBase: new URL("https://versalifehealth.com"),
+  icons: {
+    icon: [{ url: "/logo.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/logo.svg", type: "image/svg+xml" }],
+  },
+  openGraph: {
+    title: "VersaLife Health",
+    description:
+      "Shop wellness products, book telemedicine visits, or schedule hospital appointments — all under one trusted VersaLife Health brand.",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
