@@ -51,24 +51,6 @@ export const SERVICES: Service[] = [
       "Clinical summaries, sick notes & prescriptions",
     ],
   },
-  {
-    id: "channeling",
-    name: "VersaLife E-Channeling",
-    badge: "Hospital Appointments",
-    tagline: "Book hospital visits and channeling online.",
-    url: "https://channeling.versalifehealth.com",
-    host: "channeling.versalifehealth.com",
-    icon: "calendar_month",
-    accent: "slate",
-    image:
-      "https://lh3.googleusercontent.com/aida/AEtjO1XbwiZQv4pmtWHW_Y-o46EZvfUkdZmeBoPieHTi7o2EcFd5wRSZRk07Zn2w7dHWf3ooqcub-emODkYeba0xwUOKXjdPUV04vGWYbi7zHOsqYA76n55p0FPqZJ9JbyONSobjbRjDC6YHkQRO83zZh0DsaFnl6F5BsD5fNXPxdsXofVg9CuwfEKjKQUYhIM6VWapEIJ-MMnLoVO46BXnFZGEtBB1DFdiNczAFWFzeg-074nkP-_Eb122jZeU",
-    imageAlt: "Private clinic and hospital center",
-    bullets: [
-      "Choose specialist, preferred hospital & time",
-      "Pay online seamlessly via cards or local wallets",
-      "Real-time SMS appointment updates & queue tracking",
-    ],
-  },
 ];
 
 export const AMBIENT_IMAGE =

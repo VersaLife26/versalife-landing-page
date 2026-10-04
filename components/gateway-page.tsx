@@ -3,10 +3,12 @@
 import { BrandWordmark } from "@/components/brand-wordmark";
 import { GatewayToast } from "@/components/gateway-toast";
 import { MaterialIcon } from "@/components/material-icon";
-import { ServiceCard } from "@/components/service-card";
+import { CareScroll } from "@/components/care-scroll";
+import { TestimonialMarquee } from "@/components/testimonial-marquee";
 import { useGatewayNav } from "@/components/use-gateway-nav";
-import { AMBIENT_IMAGE, SERVICES } from "@/lib/services";
-import { useEffect } from "react";
+import { HeroVideo } from "@/components/hero-video";
+import { SERVICES } from "@/lib/services";
+import { useEffect, useState } from "react";
 
 const TRUST = [
   {
@@ -35,10 +37,23 @@ const TRUST = [
   },
 ];
 
-const CITIES = ["Colombo", "Kandy", "Galle", "Jaffna", "Negombo"];
-
 export function GatewayPage() {
   const { toast, navigate } = useGatewayNav();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [menuOpen]);
 
   useEffect(() => {
     const nodes = document.querySelectorAll(".reveal-on-scroll");
@@ -66,66 +81,122 @@ export function GatewayPage() {
     return () => observer.disconnect();
   }, []);
 
+  const shop = SERVICES.find((s) => s.id === "shop");
+  const telemed = SERVICES.find((s) => s.id === "telemedicine");
+
   return (
     <>
-      <div className="ambient-backdrop" aria-hidden>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={AMBIENT_IMAGE} alt="" className="ambient-backdrop-img" />
-        <div className="ambient-backdrop-veil" />
-      </div>
-      <div className="ambient-glow ambient-glow-mint" aria-hidden />
-      <div className="ambient-glow ambient-glow-navy" aria-hidden />
-
       <GatewayToast visible={toast.visible} title={toast.title} subtitle={toast.subtitle} />
 
-      <header className="site-header">
-        <div className="site-header-inner">
-          <BrandWordmark />
-          <nav className="site-nav" aria-label="Primary">
-            <a href="#" className="site-nav-link is-active" aria-current="page">
-              Hub
+      <div className="hero-shell">
+        <HeroVideo />
+
+        <header className="hero-nav">
+          <BrandWordmark variant="header" />
+          <nav className="hero-nav-pill" aria-label="Primary">
+            <a href="#" aria-current="page">
+              Home
             </a>
-            <a href="#about" className="site-nav-link">
-              About
-            </a>
-            <a href="#contact" className="site-nav-link">
-              Contact
-            </a>
+            <a href="#services">Wellness</a>
+            <a href="#services">Telemedicine</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
           </nav>
+          <a href="#services" className="hero-nav-cta">
+            Explore care
+            <MaterialIcon name="arrow_forward" />
+          </a>
+          <button
+            type="button"
+            className={`hero-menu${menuOpen ? " is-open" : ""}`}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span />
+            <span />
+            <span />
+            <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
+          </button>
+        </header>
+        <div className={`hero-drawer${menuOpen ? " is-open" : ""}`} hidden={!menuOpen}>
+          <button type="button" className="hero-drawer-backdrop" aria-label="Close menu" onClick={() => setMenuOpen(false)} />
+          <div id="mobile-nav" className="hero-drawer-panel" role="dialog" aria-modal="true" aria-label="Menu">
+            <div className="hero-drawer-head">
+              <BrandWordmark variant="header" />
+              <button type="button" className="hero-drawer-close" aria-label="Close menu" onClick={() => setMenuOpen(false)}>
+                ×
+              </button>
+            </div>
+            <nav className="hero-drawer-nav">
+              <a href="#" onClick={() => setMenuOpen(false)}>
+                Home
+              </a>
+              <a href="#services" onClick={() => setMenuOpen(false)}>
+                Wellness
+              </a>
+              <a href="#services" onClick={() => setMenuOpen(false)}>
+                Telemedicine
+              </a>
+              <a href="#about" onClick={() => setMenuOpen(false)}>
+                About
+              </a>
+              <a href="#contact" onClick={() => setMenuOpen(false)}>
+                Contact
+              </a>
+            </nav>
+            <div className="hero-drawer-actions">
+              {shop ? (
+                <button type="button" className="hero-drawer-primary" onClick={() => { setMenuOpen(false); navigate(shop.url, shop.name); }}>
+                  Shop wellness
+                  <MaterialIcon name="arrow_forward" />
+                </button>
+              ) : null}
+              {telemed ? (
+                <button type="button" className="hero-drawer-secondary" onClick={() => { setMenuOpen(false); navigate(telemed.url, telemed.name); }}>
+                  Book a visit
+                </button>
+              ) : null}
+            </div>
+          </div>
         </div>
-      </header>
 
-      <main className="gateway-main">
-        <section className="gateway-hero reveal-on-load">
-          <div className="gateway-eyebrow">
-            <span className="live-dot live-dot-sm" aria-hidden />
-            <span>VersaLife Health · Sri Lanka&apos;s Unified Care Gateway</span>
-          </div>
-          <div className="gateway-headline-3d">
-            <h1 className="gateway-headline">
-              One platform. <em>Three ways to care.</em>
-            </h1>
-          </div>
-          <p className="gateway-lead">
-            Shop wellness products, book telemedicine visits, or schedule hospital appointments — all under one
-            trusted clinical brand.
+        <section className="hero-stage" aria-label="Introduction">
+          <p className="hero-badge">
+            <span>Care</span>
+            Wellness and telemedicine, together
           </p>
-          <p className="gateway-cue">
-            Select a destination below
-            <MaterialIcon name="arrow_downward" />
+          <h1 className="hero-title">
+            Care, without
+            <span>the waiting room.</span>
+          </h1>
+          <p className="hero-lead">
+            Shop genuine wellness products, or see a licensed doctor by video. Both live under one VersaLife Health
+            brand.
           </p>
-        </section>
-
-        <section className="gateway-services" aria-labelledby="services-heading">
-          <h2 id="services-heading" className="sr-only">
-            Choose a VersaLife service
-          </h2>
-          <div className="gateway-services-grid">
-            {SERVICES.map((service, index) => (
-              <ServiceCard key={service.id} service={service} index={index} onNavigate={navigate} />
-            ))}
+          <div className="hero-actions">
+            {shop ? (
+              <button type="button" className="hero-btn hero-btn--line" onClick={() => navigate(shop.url, shop.name)}>
+                Shop wellness
+                <MaterialIcon name="arrow_forward" />
+              </button>
+            ) : null}
+            {telemed ? (
+              <button type="button" className="hero-btn hero-btn--quiet" onClick={() => navigate(telemed.url, telemed.name)}>
+                Book a visit
+                <MaterialIcon name="play_arrow" />
+              </button>
+            ) : null}
           </div>
         </section>
+      </div>
+
+      <section className="care-bridge" aria-label="What people say about VersaLife">
+        <TestimonialMarquee />
+      </section>
+
+      <main className="gateway-main gateway-main--below-hero">
+        <CareScroll services={SERVICES} onNavigate={navigate} />
 
         <section className="trust-strip" aria-label="Trust and safety">
           <div className="trust-strip-inner">
@@ -142,66 +213,42 @@ export function GatewayPage() {
             ))}
           </div>
         </section>
-
-        <section className="partnership-strip">
-          <div className="partnership-strip-inner">
-            <p className="partnership-label">
-              <MaterialIcon name="verified_user" />
-              Synchronized with leading healthcare networks across Sri Lanka
-            </p>
-            <p className="partnership-cities">
-              {CITIES.map((city, i) => (
-                <span key={city}>
-                  {i > 0 && <span className="partnership-dot">·</span>}
-                  {city}
-                </span>
-              ))}
-            </p>
-          </div>
-        </section>
       </main>
 
       <footer className="site-footer" id="contact">
+        <div className="site-footer-media" aria-hidden>
+          <video className="site-footer-video site-footer-video--desktop" autoPlay muted loop playsInline preload="metadata">
+            <source src="/video/footer-desktop.mp4" type="video/mp4" />
+          </video>
+          <video className="site-footer-video site-footer-video--mobile" autoPlay muted loop playsInline preload="metadata">
+            <source src="/video/footer-mobile.mp4" type="video/mp4" />
+          </video>
+          <div className="site-footer-scrim" />
+        </div>
         <div className="site-footer-inner">
-          <div className="site-footer-col">
-            <BrandWordmark />
-            <p className="site-footer-blurb">
-              Unified personal wellness, diagnostic precision, and integrated clinical ecosystems designed for calm
-              and health longevity.
-            </p>
+          <div className="site-footer-logo">
+            <BrandWordmark variant="footer" />
           </div>
-          <div className="site-footer-col">
-            <span className="site-footer-label">Ecosystem Services</span>
-            <ul className="site-footer-links">
-              {SERVICES.map((s) => (
-                <li key={s.id}>
-                  <span className="footer-dot" aria-hidden />
-                  <a href={s.url} onClick={(e) => { e.preventDefault(); navigate(s.url, s.name); }}>
-                    {s.name} <span className="footer-host">({s.host})</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="site-footer-col" id="about">
-            <span className="site-footer-label">Information &amp; Care</span>
-            <div className="site-footer-links">
-              <a href="#about">About VersaLife</a>
-              <a href="#contact">Clinical Concierge &amp; Contact</a>
-              <a href="#">Privacy Policy</a>
-              <a href="#">Terms of Service</a>
-            </div>
-          </div>
+          <p className="site-footer-blurb">
+            Care, without
+            <span>the waiting room.</span>
+          </p>
+          <nav className="site-footer-links" aria-label="Footer" id="about">
+            {SERVICES.map((s) => (
+              <a key={s.id} href={s.url} onClick={(e) => { e.preventDefault(); navigate(s.url, s.name); }}>
+                {s.id === "shop" ? "Shop" : "Telemedicine"}
+              </a>
+            ))}
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+          </nav>
         </div>
         <div className="site-footer-bottom">
-          <span>© {new Date().getFullYear()} VersaLife Health Inc. All rights reserved.</span>
-          <div className="site-footer-legal">
-            <a href="#">Privacy</a>
-            <span>·</span>
-            <a href="#">Terms</a>
-            <span>·</span>
-            <a href="#contact">Contact</a>
-          </div>
+          <span>© {new Date().getFullYear()} VersaLife Health</span>
+          <span aria-hidden>·</span>
+          <a href="#">Privacy</a>
+          <span aria-hidden>·</span>
+          <a href="#">Terms</a>
         </div>
       </footer>
     </>

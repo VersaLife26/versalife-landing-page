@@ -1,14 +1,14 @@
-import Image from "next/image";
+type BrandWordmarkProps = {
+  className?: string;
+  variant?: "header" | "footer";
+};
 
-export function BrandWordmark({ className = "" }: { className?: string }) {
+export function BrandWordmark({ className = "", variant = "header" }: BrandWordmarkProps) {
   return (
-    <div className={`brand-wordmark ${className}`.trim()}>
-      <Image src="/logo.svg" alt="" width={93} height={98} className="brand-wordmark-logo" priority />
-      <span className="brand-wordmark-text">
-        <span className="is-navy">Versa</span>
-        <span className="is-mint">Life</span>{" "}
-        <span className="brand-wordmark-health">Health</span>
-      </span>
-    </div>
+    <a href="#" className={`brand-wordmark brand-wordmark--${variant} ${className}`.trim()} aria-label="VersaLife Health">
+      {/* Transparent lockup. A plain img keeps the wide aspect ratio. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/versalife-health-logo.png" alt="" className="brand-wordmark-logo" />
+    </a>
   );
 }
