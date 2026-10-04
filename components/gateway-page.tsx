@@ -100,7 +100,7 @@ export function GatewayPage() {
             <a href="#services">Wellness</a>
             <a href="#services">Telemedicine</a>
             <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+            <a href="/contact">Contact</a>
           </nav>
           <a href="#services" className="hero-nav-cta">
             Explore care
@@ -141,7 +141,7 @@ export function GatewayPage() {
               <a href="#about" onClick={() => setMenuOpen(false)}>
                 About
               </a>
-              <a href="#contact" onClick={() => setMenuOpen(false)}>
+              <a href="/contact" onClick={() => setMenuOpen(false)}>
                 Contact
               </a>
             </nav>
@@ -215,7 +215,7 @@ export function GatewayPage() {
         </section>
       </main>
 
-      <footer className="site-footer" id="contact">
+      <footer className="site-footer">
         <div className="site-footer-media" aria-hidden>
           <video className="site-footer-video site-footer-video--desktop" autoPlay muted loop playsInline preload="metadata">
             <source src="/video/footer-desktop.mp4" type="video/mp4" />
@@ -240,15 +240,15 @@ export function GatewayPage() {
               </a>
             ))}
             <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
+            <a href="/contact">Contact</a>
           </nav>
         </div>
         <div className="site-footer-bottom">
           <span>© {new Date().getFullYear()} VersaLife Health</span>
           <span aria-hidden>·</span>
-          <a href="#">Privacy</a>
+          <a href="/privacy">Privacy</a>
           <span aria-hidden>·</span>
-          <a href="#">Terms</a>
+          <a href="/terms">Terms</a>
         </div>
       </footer>
     </>
