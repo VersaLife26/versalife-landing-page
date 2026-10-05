@@ -1,7 +1,6 @@
 "use client";
 
 import { BrandWordmark } from "@/components/brand-wordmark";
-import { GatewayToast } from "@/components/gateway-toast";
 import { MaterialIcon } from "@/components/material-icon";
 import { CareScroll } from "@/components/care-scroll";
 import { TestimonialMarquee } from "@/components/testimonial-marquee";
@@ -38,7 +37,7 @@ const TRUST = [
 ];
 
 export function GatewayPage() {
-  const { toast, navigate } = useGatewayNav();
+  const { navigate } = useGatewayNav();
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -86,8 +85,6 @@ export function GatewayPage() {
 
   return (
     <>
-      <GatewayToast visible={toast.visible} title={toast.title} subtitle={toast.subtitle} />
-
       <div className="hero-shell">
         <HeroVideo />
 

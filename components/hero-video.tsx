@@ -1,6 +1,5 @@
 "use client";
 
-import { AMBIENT_IMAGE } from "@/lib/services";
 import { useEffect, useRef } from "react";
 
 const DESKTOP_SRC = "/video/hero-desktop.mp4";
@@ -44,7 +43,6 @@ export function HeroVideo() {
         loop
         playsInline
         preload="auto"
-        poster={AMBIENT_IMAGE}
       >
         <source src={DESKTOP_SRC} type="video/mp4" />
       </video>
@@ -56,7 +54,6 @@ export function HeroVideo() {
         loop
         playsInline
         preload="auto"
-        poster={AMBIENT_IMAGE}
       >
         <source src={MOBILE_SRC} type="video/mp4" />
       </video>

@@ -52,6 +52,3 @@ export const SERVICES: Service[] = [
     ],
   },
 ];
-
-export const AMBIENT_IMAGE =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuDVsI-BNXvF8rlIw58NcVGiA1CLdIexybZuIRUfqK3jEmgRpXkOBRt6XD0RFU3GjHfTMbZ4JHb1QR6wd92Tm3G9ODTOa5QKAg6vMu_B7gXmfjeFiU9kjk3IBE8y1Zc6BJGyNwq1v50HJtWjAas1nSATdgRW4ctMVtwk-T-IEZ13twB6qPmAgHXyJhIIpnaIDF5cWOQz_n_282eTpzikX5wHkBPC9kbbKdrC0-fzEn5EzQ3LYnQg6IOA";
