@@ -20,6 +20,12 @@ export const metadata: Metadata = {
   description:
     "Shop wellness products, book telemedicine visits, or schedule hospital appointments — all under one trusted VersaLife Health brand.",
   metadataBase: new URL("https://versalifehealth.com"),
+  alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "48x48" },
@@ -42,6 +48,13 @@ const organizationJsonLd = {
   logo: "https://versalifehealth.com/apple-touch-icon.png",
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "VersaLife Health",
+  url: "https://versalifehealth.com/",
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -59,6 +72,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         {children}
       </body>

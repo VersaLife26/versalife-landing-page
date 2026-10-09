@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { InfoShell } from "@/components/info-shell";
+import { sitePageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = sitePageMetadata("/privacy", {
   title: "Privacy · VersaLife Health",
   description: "How VersaLife Health collects, uses, and protects information across the wellness shop and telemedicine.",
-};
+});
 
 export default function PrivacyPage() {
   return (

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact-form";
 import { InfoShell } from "@/components/info-shell";
+import { sitePageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = sitePageMetadata("/contact", {
   title: "Contact · VersaLife Health",
   description: "Reach VersaLife Health about a wellness order, a telemedicine visit, or a general question.",
-};
+});
 
 export default function ContactPage() {
   return (

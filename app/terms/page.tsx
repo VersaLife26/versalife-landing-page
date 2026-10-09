@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { InfoShell } from "@/components/info-shell";
+import { sitePageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = sitePageMetadata("/terms", {
   title: "Terms · VersaLife Health",
   description: "The terms for using VersaLife Health, the wellness shop, and telemedicine visits.",
-};
+});
 
 export default function TermsPage() {
   return (
